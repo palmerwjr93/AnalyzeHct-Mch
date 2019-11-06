@@ -1,4 +1,9 @@
 ## AnalyzeHct-Mch
+This coode the code is provided in a standard and easily readable format and is capable of performing ANOVA, sinlge linear regression, producing a box-and-whisker plot along with a scatter plot with regression line. Code also identifies subject IDs with abnormal lab values according to listed reference and places this evaluation into a new column in the data frame. 
+
+Chernecky CC, Berger BJ. Blood indices – blood. In: Chernecky CC, Berger BJ, eds. Laboratory Tests and Diagnostic Procedures. 6th ed. Philadelphia, PA: Elsevier; 2013:217-219.
+
+
 ![doi](../master/Images/zenodo.3373938.svg?sanitize=true)
 ### Single and multiple regressions, and scatterplots for clinical bloodwork and gene expression data.
 ([AnalyzeBloodwork.R](../master/AnalyzeBloodwork.R)) will allow you to load a comma-delimited .csv with various datapoints, perform single and multiple regressions of Body Mass Index (BMI) vs. variables from the Complete Blood Count with Differential (CBC-D) results, and produce 2-D and 3-D scatterplots for the results. 
