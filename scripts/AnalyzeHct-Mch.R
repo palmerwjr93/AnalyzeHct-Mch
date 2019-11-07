@@ -43,3 +43,90 @@ ggplot(IBS1, aes(x=BMI, y=MCH)) +
 
 s3d <- scatterplot3d(IBS$BMI, IBS$SerumCortisol, IBS$CRP,  pch=16, color="steelblue", box="TRUE", highlight.3d=FALSE, type="h", main="BMI x Cortisol x CRP")
 fit <- lm(SerumCortisol ~ BMI + CRP, data=IBS)
+
+## Output the results to a file
+## http://www.cookbook-r.com/Data_input_and_output/Writing_text_and_output_from_analyses_to_a_file/
+sink('data_output/MCH_regression.txt', append = TRUE)
+print(MCH.regression)
+sink()
+
+sink('data_output/HCT_regression.txt', append = TRUE)
+print(HCT.regression)
+sink()
+
+## ANOVA: IBS-subtype vs. Bloodwork parameter
+## http://www.sthda.com/english/wiki/one-way-anova-test-in-r
+MCH.aov <- aov(MCH ~ IBS.subtype, data = IBS)
+summary(MCH.aov)
+sink('data_output/MCH_anova.txt', append = TRUE)
+print(MCH.aov)
+sink()
+
+HCT.aov <- aov(HCT ~ IBS.subtype, data = IBS)
+summary(HCT.aov)
+sink('data_output/HCT_anova.txt', append = TRUE)
+print(HCT.aov)
+sink()
+
+
+## Print scatterplot and box plots as .png files into "fig_output" project directory.
+## http://www.sthda.com/english/wiki/ggsave-save-a-ggplot-r-software-and-data-visualization
+
+## Scatterplots
+## https://www.statmethods.net/graphs/scatterplot.html
+
+ggplot(IBS, aes(x = BMI, y = MCH)) +
+  geom_point() +    
+  geom_smooth(method = lm) 
+
+ggplot(IBS, aes(x = BMI, y = HCT)) +
+  geom_point() +    
+  geom_smooth(method = lm) 
+
+png("fig_output/MCH_scatterplot.png")
+MCH_scatterplot <- ggplot(IBS, aes(x = BMI, y = MCH)) +
+  geom_point() +    
+  geom_smooth(method = lm)
+print(MCH_scatterplot)
+dev.off()
+
+
+png("fig_output/HCT_scatterplot.png")
+HCT_scatterplot <- ggplot(IBS, aes(x = BMI, y = HCT)) +
+  geom_point() +    
+  geom_smooth(method = lm)
+print(HCT_scatterplot)
+dev.off()
+
+
+## Box plots
+## https://www.statmethods.net/graphs/boxplot.html
+
+boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype", 
+                       xlab = "IBS.subtype", ylab = "HCT"
+)
+
+png("fig_output/HCT_boxplot.png")
+HCT_boxplot <- boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype", 
+                       xlab = "IBS.subtype", ylab = "HCT"
+)
+print(HCT_boxplot)
+dev.off()
+
+boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", 
+        xlab = "IBS.subtype", ylab = "MCH"
+)
+
+boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype", 
+                       xlab = "IBS.subtype", ylab = "HCT"
+)
+
+png("fig_output/MCH_boxplot.png")
+MCH_boxplot <- 
+print(MCH_boxplot)
+dev.off()
+
+boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", 
+        xlab = "IBS.subtype", ylab = "MCH"
+)
+
