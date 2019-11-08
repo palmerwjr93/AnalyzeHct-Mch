@@ -3,12 +3,10 @@ This standard, easily readable format of R code is capable of performing ANOVA, 
 Data (RobinsonEtAl_Sup1.csv) was downloaded from: Robinson, JM. et al. 2019. Complete blood count with differential: An effective diagnostic for IBS subtype in the context of BMI? BioRxiv. doi: https://doi.org/10.1101/608208.
 
 ##  Single Regressions 
-##  Data obtained from Robinson, et al. 2019 (doi: https://doi.org/10.1101/608208)
-##  https://statquest.org/2017/10/30/statquest-multiple-regression-in-r/
-##  http://www.sthda.com/english/articles/40-regression-analysis/167-simple-linear-regression-in-r/
-##  http://r-statistics.co/Linear-Regression.html
+## http://r-statistics.co/Linear-Regression.html
 
 ## Single Regression Test, BMI vs. Bloodwork parameter
+
 HCT.regression <- lm(BMI ~ HCT, data = IBS)
 summary(HCT.regression)
 MCH.regression <- lm(BMI ~ MCH, data = IBS)
@@ -16,6 +14,7 @@ summary(MCH.regression)
 
 ## ANOVA: IBS-subtype vs. Bloodwork parameter
 ## http://www.sthda.com/english/wiki/one-way-anova-test-in-r
+
 MCH.aov <- aov(MCH ~ IBS.subtype, data = IBS)
 summary(MCH.aov)
 sink('data_output/MCH_anova.txt', append = TRUE)
@@ -34,22 +33,31 @@ sink()
 ggplot(IBS, aes(x = BMI, y = MCH)) +
   geom_point() +    
   geom_smooth(method = lm) 
+  
 ggplot(IBS, aes(x = BMI, y = HCT)) +
   geom_point() +    
   geom_smooth(method = lm) 
+  
 png("fig_output/MCH_scatterplot.png")
+
 MCH_scatterplot <- ggplot(IBS, aes(x = BMI, y = MCH)) +
   geom_point() +    
   geom_smooth(method = lm)
+  
 print(MCH_scatterplot)
 dev.off()
+
 ![](Images/MCH_scatterplot.png?sanitize=true)
+
 png("fig_output/HCT_scatterplot.png")
+
 HCT_scatterplot <- ggplot(IBS, aes(x = BMI, y = HCT)) +
   geom_point() +    
   geom_smooth(method = lm)
+  
 print(HCT_scatterplot)
 dev.off()
+
 ![](Images/HCT_scatterplot.png?sanitize=true)
 
 ## Box plots
@@ -80,6 +88,7 @@ boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", xlab = "IBS.su
 )
 
 ## Identification of Values outside of range
+
 library(dplyr
       )
 labels <- c("low", "in range", "high")
@@ -102,7 +111,7 @@ IBS %>% mutate (
   HCT_bucket = if_else(HCT < 37, "low", if_else(HCT > 42, "high", "in range"))
 )
 
-##Linking Abnormal Values to Pt ID
+## Linking Abnormal Values to Pt ID
 
 IBS %>% mutate(
   MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range")),
