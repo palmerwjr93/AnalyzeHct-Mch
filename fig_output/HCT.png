@@ -1,0 +1,6 @@
+png("fig_output/HCT_scatterplot.png")
+HCT_scatterplot <- ggplot(IBS, aes(x = BMI, y = HCT)) +
+  geom_point() +    
+  geom_smooth(method = lm)
+print(HCT_scatterplot)
+dev.off()
