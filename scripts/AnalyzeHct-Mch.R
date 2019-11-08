@@ -130,3 +130,57 @@ boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype",
         xlab = "IBS.subtype", ylab = "MCH"
 )
 
+## Identificaation of Values outside of range
+https://blog.rstudio.com/2016/06/27/dplyr-0-5-0/
+https://www.ncbi.nlm.nih.gov/books/NBK259/
+
+
+library(dplyr
+      )
+labels <- c("low", "in range", "high")
+IBS %>% mutate(
+  MCH_bucket = cut(MCH, c(-Inf, 27 - .Machine$double.eps, 33, Inf), labels),
+  HCT_bucket = cut(HCT, c(-Inf, 37 - .Machine$double.eps, 42, Inf), labels)
+)
+
+IBS %>% mutate(
+  MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range")),
+  HCT_bucket = if_else(HCT < 37, "low", if_else(HCT > 42, "high", "in range"))
+)
+
+dput(head(IBS)) 
+labels <- c("low", "in range", "high")
+IBS %>% mutate (
+  MCH_bucket = cut(MCH), c(-Inf, 27 - .Machine$double.eps, 33, Inf), (labels),
+  HCT_bucket = cut(HCT), c(-Inf, 37 - .Machine$double.eps, 42, Inf), (labels)
+)
+
+IBS %>% mutate (
+  MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range")),
+  HCT_bucket = if_else(HCT < 37, "low", if_else(HCT > 42, "high", "in range"))
+)
+
+##Linking abnormal values to Pt ID
+https://dplyr.tidyverse.org/reference/mutate.html
+https://blog.rstudio.com/2016/06/27/dplyr-0-5-0/
+
+IBS %>% mutate(
+  MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range")),
+) %>%
+  group_by(MCH_bucket) %>% 
+  summarise(IDS=toString(ID))
+
+IBS %>% mutate(
+  MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range"))
+) %>%
+  group_by(MCH_bucket) %>% 
+  summarise(IDS=toString(ID))
+
+IBS %>% mutate(
+  HCT_bucket = if_else(HCT < 37, "low", if_else(HCT > 42, "high", "in range"))
+) %>%
+  group_by(HCT_bucket) %>% 
+  summarise(IDS=toString(ID))
+
+summarise(IDS=toString(ID))
+IBS %>% head()
