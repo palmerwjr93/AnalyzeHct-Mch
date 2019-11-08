@@ -1,6 +1,0 @@
-png("fig_output/MCH_scatterplot.png")
-MCH_scatterplot <- ggplot(IBS, aes(x = BMI, y = MCH)) +
-  geom_point() +    
-  geom_smooth(method = lm)
-print(MCH_scatterplot)
-dev.off()
