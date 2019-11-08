@@ -33,31 +33,23 @@ sink()
 ggplot(IBS, aes(x = BMI, y = MCH)) +
   geom_point() +    
   geom_smooth(method = lm) 
-  
-ggplot(IBS, aes(x = BMI, y = HCT)) +
-  geom_point() +    
-  geom_smooth(method = lm) 
-  
 png("fig_output/MCH_scatterplot.png")
-
 MCH_scatterplot <- ggplot(IBS, aes(x = BMI, y = MCH)) +
   geom_point() +    
   geom_smooth(method = lm)
-  
 print(MCH_scatterplot)
 dev.off()
-
 ![](Images/MCH_scatterplot.png?sanitize=true)
 
+ggplot(IBS, aes(x = BMI, y = HCT)) +
+  geom_point() +    
+  geom_smooth(method = lm) 
 png("fig_output/HCT_scatterplot.png")
-
 HCT_scatterplot <- ggplot(IBS, aes(x = BMI, y = HCT)) +
   geom_point() +    
   geom_smooth(method = lm)
-  
 print(HCT_scatterplot)
 dev.off()
-
 ![](Images/HCT_scatterplot.png?sanitize=true)
 
 
@@ -73,13 +65,10 @@ HCT_boxplot <- boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype",
 )
 print(HCT_boxplot)
 dev.off()
+![HCT](Images/HCT_boxplot.png?sanitize=true)
 
 boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", 
         xlab = "IBS.subtype", ylab = "MCH"
-)
-
-boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype", 
-                       xlab = "IBS.subtype", ylab = "HCT"
 )
 png("fig_output/MCH_boxplot.png")
 MCH_boxplot <- 
@@ -88,13 +77,12 @@ dev.off()
 ![](Images/Rplot.png?sanitize=true)
 boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", xlab = "IBS.subtype", ylab = "MCH"
 )
-
 ![MCH](Images/Rplot.png?sanitize=true)
 
-![HCT](Images/HCT_boxplot.png?sanitize=true)
 
 
-## Identification of Values outside of range
+
+## Identification of Values outside of range (Run for results)
 
 library(dplyr)
 
@@ -118,7 +106,7 @@ IBS %>% mutate (
   HCT_bucket = if_else(HCT < 37, "low", if_else(HCT > 42, "high", "in range"))
 )
 
-## Linking of Abnormal Values to Pt ID
+## Linking of Abnormal Values to Pt ID (Run for results)
 
 IBS %>% mutate(
   MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range")),
@@ -137,3 +125,4 @@ IBS %>% mutate(
   summarise(IDS=toString(ID))
 summarise(IDS=toString(ID))
 IBS %>% head()
+
