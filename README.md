@@ -1,6 +1,5 @@
 ## AnalyzeHct-Mch
-
-      This standard, easily readable format of R code is capable of performing ANOVA, sinlge linear regression, producing a box and-whisker plot along with a scatter plot with regression line. This code also identifies subject IDs with abnormal lab values according to values provided by Chernecky CC, Berger BJ. Blood indices – blood. In: Chernecky CC, Berger BJ, eds. Laboratory Tests and Diagnostic Procedures. 6th ed. Philadelphia, PA: Elsevier; 2013:217-219.(RobinsonEtAl_Sup1.csv) was downloaded from: Robinson, JM. et al. 2019. Complete blood count with differential: An effective diagnostic for IBS subtype in the context of BMI? BioRxiv. doi: https://doi.org/10.1101/608208.
+   This standard, easily readable format of R code is capable of performing ANOVA, sinlge linear regression, producing a box and-whisker plot along with a scatter plot with regression line. This code also identifies subject IDs with abnormal lab values according to values provided by Chernecky CC, Berger BJ. Blood indices – blood. In: Chernecky CC, Berger BJ, eds. Laboratory Tests and Diagnostic Procedures. 6th ed. Philadelphia, PA: Elsevier; 2013:217-219.(RobinsonEtAl_Sup1.csv) was downloaded from: Robinson, JM. et al. 2019. Complete blood count with differential: An effective diagnostic for IBS subtype in the context of BMI? BioRxiv. doi: https://doi.org/10.1101/608208.
 
 ## Single Regression Test, BMI vs. Bloodwork parameter (Hct-Mch)
 
