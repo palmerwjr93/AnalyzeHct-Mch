@@ -132,11 +132,12 @@ boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype",
 
 ## Identificaation of Values outside of range
 https://blog.rstudio.com/2016/06/27/dplyr-0-5-0/
-https://www.ncbi.nlm.nih.gov/books/NBK259/
+Works Cited : Chernecky CC, Berger BJ. Blood indices – blood.
+Chernecky CC, Berger BJ, eds. Laboratory Tests and Diagnostic Procedures. 
+6th ed. Philadelphia, PA: Elsevier; 2013:217-219.
 
 
-library(dplyr
-      )
+library(dplyr)
 labels <- c("low", "in range", "high")
 IBS %>% mutate(
   MCH_bucket = cut(MCH, c(-Inf, 27 - .Machine$double.eps, 33, Inf), labels),
