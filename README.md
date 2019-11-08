@@ -3,13 +3,7 @@ This standard, easily readable format of R code is capable of performing ANOVA, 
 
 Chernecky CC, Berger BJ. Blood indices – blood. In: Chernecky CC, Berger BJ, eds. Laboratory Tests and Diagnostic Procedures. 6th ed. Philadelphia, PA: Elsevier; 2013:217-219.
 
-
-![doi](../master/Images/zenodo.3373938.svg?sanitize=true)
-### Single and multiple regressions, and scatterplots for clinical bloodwork and gene expression data.
-([AnalyzeBloodwork.R](../master/AnalyzeBloodwork.R)) will allow you to load a comma-delimited .csv with various datapoints, perform single and multiple regressions of Body Mass Index (BMI) vs. variables from the Complete Blood Count with Differential (CBC-D) results, and produce 2-D and 3-D scatterplots for the results. 
-
 Data (RobinsonEtAl_Sup1.csv) was downloaded from: 
-
 Robinson, JM. et al. 2019. Complete blood count with differential: An effective diagnostic for IBS subtype in the context of BMI? BioRxiv. doi: https://doi.org/10.1101/608208.
 
 
@@ -73,7 +67,7 @@ print(MCH_scatterplot)
 dev.off()
 
 
-![BMI_MCH](../Images/MCH_scatterplot.png?sanitize=true)
+![BMI_MCH](../AnalyzeHct-Mch/Images/MCH_scatterplot.png?sanitize=true)
 
 png("fig_output/HCT_scatterplot.png")
 HCT_scatterplot <- ggplot(IBS, aes(x = BMI, y = HCT)) +
@@ -83,7 +77,7 @@ print(HCT_scatterplot)
 dev.off()
 
 
-![BMI_HCT](../Images/HCT_scatterplotcopy.png?sanitize=true)
+![BMI_HCT](../AnalyzeHct-Mch/Images/HCT_scatterplot.png?sanitize=true)
 
 ## Box plots
 ## https://www.statmethods.net/graphs/boxplot.html
@@ -99,7 +93,7 @@ HCT_boxplot <- boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype",
 print(HCT_boxplot)
 dev.off()
 
-![HCT Boxplot](../images/HCT_boxplot.png?sanitize=true)
+![HCT Boxplot](../AnalyzeHct-Mch/images/HCT_boxplot.png?sanitize=true)
 
 boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", 
         xlab = "IBS.subtype", ylab = "MCH"
@@ -114,7 +108,7 @@ MCH_boxplot <-
 print(MCH_boxplot)
 dev.off()
 
-![MCH Boxplot](../images/Rplot.png?sanitize=true)
+![MCH Boxplot](../AnalyzeHct-Mch/images/Rplot.png?sanitize=true)
 
 boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", xlab = "IBS.subtype", ylab = "MCH"
 )
