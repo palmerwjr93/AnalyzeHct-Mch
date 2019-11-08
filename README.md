@@ -112,8 +112,7 @@ dev.off()
 boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", xlab = "IBS.subtype", ylab = "MCH"
 )
 
-## Identificaation of Values outside of range
-
+## Identification of Values outside of range
 
 library(dplyr
       )
