@@ -73,6 +73,8 @@ print(MCH_scatterplot)
 dev.off()
 
 
+![BMI_MCH](../Images/MCH_scatterplot.png?sanitize=true)
+
 png("fig_output/HCT_scatterplot.png")
 HCT_scatterplot <- ggplot(IBS, aes(x = BMI, y = HCT)) +
   geom_point() +    
@@ -80,6 +82,8 @@ HCT_scatterplot <- ggplot(IBS, aes(x = BMI, y = HCT)) +
 print(HCT_scatterplot)
 dev.off()
 
+
+![BMI_HCT](../Images/HCT_scatterplotcopy.png?sanitize=true)
 
 ## Box plots
 ## https://www.statmethods.net/graphs/boxplot.html
@@ -95,6 +99,8 @@ HCT_boxplot <- boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype",
 print(HCT_boxplot)
 dev.off()
 
+![HCT Boxplot](../images/HCT_boxplot.png?sanitize=true)
+
 boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", 
         xlab = "IBS.subtype", ylab = "MCH"
 )
@@ -108,6 +114,7 @@ MCH_boxplot <-
 print(MCH_boxplot)
 dev.off()
 
+![MCH Boxplot](../images/Rplot.png?sanitize=true)
 
 boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", xlab = "IBS.subtype", ylab = "MCH"
 )
