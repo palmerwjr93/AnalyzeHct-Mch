@@ -12,7 +12,7 @@ summary(HCT.regression)
 MCH.regression <- lm(BMI ~ MCH, data = IBS)
 summary(MCH.regression)
 
-## ANOVA: IBS-subtype vs. Bloodwork parameter
+## ANOVA: IBS-subtype vs. Hct-Mch
 ## http://www.sthda.com/english/wiki/one-way-anova-test-in-r
 
 MCH.aov <- aov(MCH ~ IBS.subtype, data = IBS)
@@ -27,7 +27,7 @@ sink('data_output/HCT_anova.txt', append = TRUE)
 print(HCT.aov)
 sink()
 
-## Scatterplots
+## Scatterplot of Hct-Mch
 ## https://www.statmethods.net/graphs/scatterplot.html
 
 ggplot(IBS, aes(x = BMI, y = MCH)) +
@@ -60,7 +60,7 @@ dev.off()
 
 ![](Images/HCT_scatterplot.png?sanitize=true)
 
-## Box plots
+## Box plot of Hct-Mch
 ## https://www.statmethods.net/graphs/boxplot.html
 
 boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype", 
@@ -89,8 +89,8 @@ boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", xlab = "IBS.su
 
 ## Identification of Values outside of range
 
-library(dplyr
-      )
+library(dplyr)
+
 labels <- c("low", "in range", "high")
 IBS %>% mutate(
   MCH_bucket = cut(MCH, c(-Inf, 27 - .Machine$double.eps, 33, Inf), labels),
@@ -111,7 +111,7 @@ IBS %>% mutate (
   HCT_bucket = if_else(HCT < 37, "low", if_else(HCT > 42, "high", "in range"))
 )
 
-## Linking Abnormal Values to Pt ID
+## Linking of Abnormal Values to Pt ID
 
 IBS %>% mutate(
   MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range")),
