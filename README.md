@@ -71,21 +71,16 @@ boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype",
         xlab = "IBS.subtype", ylab = "MCH"
 )
 png("fig_output/MCH_boxplot.png")
-MCH_boxplot <- 
+MCH_boxplot <- boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", 
+        xlab = "IBS.subtype", ylab = "MCH"
+)
 print(MCH_boxplot)
 dev.off()
-![](Images/Rplot.png?sanitize=true)
-boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", xlab = "IBS.subtype", ylab = "MCH"
-)
 ![MCH](Images/Rplot.png?sanitize=true)
-
-
-
 
 ## Identification of Values outside of range (Run for results)
 
 library(dplyr)
-
 labels <- c("low", "in range", "high")
 IBS %>% mutate(
   MCH_bucket = cut(MCH, c(-Inf, 27 - .Machine$double.eps, 33, Inf), labels),
