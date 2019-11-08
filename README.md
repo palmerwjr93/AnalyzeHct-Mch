@@ -12,72 +12,153 @@ Data (RobinsonEtAl_Sup1.csv) was downloaded from:
 
 Robinson, JM. et al. 2019. Complete blood count with differential: An effective diagnostic for IBS subtype in the context of BMI? BioRxiv. doi: https://doi.org/10.1101/608208.
 
-##
-### Results of single regression, BMI x Serum Cortisol
-```
-> single.regression <- lm(BMI ~ SerumCortisol, data=IBS1)
-> print(single.regression)
 
-Call:
-lm(formula = BMI ~ SerumCortisol, data = IBS1)
+##  Single Regressions 
+##  Data obtained from Robinson, et al. 2019 (doi: https://doi.org/10.1101/608208)
+##  https://statquest.org/2017/10/30/statquest-multiple-regression-in-r/
+##  http://www.sthda.com/english/articles/40-regression-analysis/167-simple-linear-regression-in-r/
+##  http://r-statistics.co/Linear-Regression.html
 
-Coefficients:
-  (Intercept)  SerumCortisol  
-      31.9454        -0.5004  
-```
-```
-ggplot(IBS1, aes(x=BMI, y=SerumCortisol)) +
+## Single Regression Test, BMI vs. Bloodwork parameter
+HCT.regression <- lm(BMI ~ HCT, data = IBS)
+summary(HCT.regression)
+
+MCH.regression <- lm(BMI ~ MCH, data = IBS)
+summary(MCH.regression)
+
+## Output the results to a file
+## http://www.cookbook-r.com/Data_input_and_output/Writing_text_and_output_from_analyses_to_a_file/
+sink('data_output/MCH_regression.txt', append = TRUE)
+print(MCH.regression)
+sink()
+
+sink('data_output/HCT_regression.txt', append = TRUE)
+print(HCT.regression)
+sink()
+
+## ANOVA: IBS-subtype vs. Bloodwork parameter
+## http://www.sthda.com/english/wiki/one-way-anova-test-in-r
+MCH.aov <- aov(MCH ~ IBS.subtype, data = IBS)
+summary(MCH.aov)
+sink('data_output/MCH_anova.txt', append = TRUE)
+print(MCH.aov)
+sink()
+
+HCT.aov <- aov(HCT ~ IBS.subtype, data = IBS)
+summary(HCT.aov)
+sink('data_output/HCT_anova.txt', append = TRUE)
+print(HCT.aov)
+sink()
+
+
+## Print scatterplot and box plots as .png files into "fig_output" project directory.
+## http://www.sthda.com/english/wiki/ggsave-save-a-ggplot-r-software-and-data-visualization
+
+## Scatterplots
+## https://www.statmethods.net/graphs/scatterplot.html
+
+ggplot(IBS, aes(x = BMI, y = MCH)) +
   geom_point() +    
-  geom_smooth(method=lm) 
-```
-![BMI_Cortisol](../master/Images/CORTxBMI.png?sanitize=true)
-##
-### Results of single regression, BMI x C-Reactive Protein (CRP)
-```
-> single.regression <- lm(BMI ~ CRP, data=IBS1)
-> print(single.regression)
+  geom_smooth(method = lm) 
 
-Call:
-lm(formula = BMI ~ SerumCortisol + CRP, data = IBS1)
+ggplot(IBS, aes(x = BMI, y = HCT)) +
+  geom_point() +    
+  geom_smooth(method = lm) 
 
-Coefficients:
-  (Intercept)  SerumCortisol            CRP  
-      30.7936        -0.5231         0.6042  
+png("fig_output/MCH_scatterplot.png")
+MCH_scatterplot <- ggplot(IBS, aes(x = BMI, y = MCH)) +
+  geom_point() +    
+  geom_smooth(method = lm)
+print(MCH_scatterplot)
+dev.off()
 
-```
 
-![BMI_CRP](../master/Images/BMIxCRP.png?sanitize=true)
-##
-##
-### Results of multiple regression, BMI x Serum Cortisol + C-Reactive Protein (CRP)
-```
-> fit1 <- lm(BMI ~ SerumCortisol + CRP, data=IBS1)
-> summary(fit1)
+png("fig_output/HCT_scatterplot.png")
+HCT_scatterplot <- ggplot(IBS, aes(x = BMI, y = HCT)) +
+  geom_point() +    
+  geom_smooth(method = lm)
+print(HCT_scatterplot)
+dev.off()
 
-Call:
-lm(formula = BMI ~ SerumCortisol + CRP, data = IBS1)
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--9.1378 -3.4448 -0.9904  2.3330 20.6056 
+## Box plots
+## https://www.statmethods.net/graphs/boxplot.html
 
-Coefficients:
-              Estimate Std. Error t value Pr(>|t|)    
-(Intercept)    30.7936     1.4134  21.787  < 2e-16 ***
-SerumCortisol  -0.5231     0.1233  -4.244 4.72e-05 ***
-CRP             0.6042     0.1534   3.938 0.000147 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype", 
+                       xlab = "IBS.subtype", ylab = "HCT"
+)
 
-Residual standard error: 5.354 on 106 degrees of freedom
-  (2 observations deleted due to missingness)
-Multiple R-squared:  0.232,	Adjusted R-squared:  0.2175 
-F-statistic: 16.01 on 2 and 106 DF,  p-value: 8.388e-07
-```
-```
-s3d <- scatterplot3d(IBS$BMI, IBS$SerumCortisol, IBS$CRP,  pch=16, color="steelblue", box="TRUE", highlight.3d=FALSE, type="h", main="BMI x Cortisol x CRP")
-fit <- lm(SerumCortisol ~ BMI + CRP, data=IBS)
-s3d$plane3d(fit)
-```
-![BMI_Cortisol_CRP_3d-scatterplot](../master/Images/MultipleRegression_3way.png?sanitize=true)
-##
+png("fig_output/HCT_boxplot.png")
+HCT_boxplot <- boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype", 
+                       xlab = "IBS.subtype", ylab = "HCT"
+)
+print(HCT_boxplot)
+dev.off()
+
+boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", 
+        xlab = "IBS.subtype", ylab = "MCH"
+)
+
+boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype", 
+                       xlab = "IBS.subtype", ylab = "HCT"
+)
+
+png("fig_output/MCH_boxplot.png")
+MCH_boxplot <- 
+print(MCH_boxplot)
+dev.off()
+
+
+boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", xlab = "IBS.subtype", ylab = "MCH"
+)
+
+## Identificaation of Values outside of range
+
+
+library(dplyr
+      )
+labels <- c("low", "in range", "high")
+IBS %>% mutate(
+  MCH_bucket = cut(MCH, c(-Inf, 27 - .Machine$double.eps, 33, Inf), labels),
+  HCT_bucket = cut(HCT, c(-Inf, 37 - .Machine$double.eps, 42, Inf), labels)
+)
+
+IBS %>% mutate(
+  MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range")),
+  HCT_bucket = if_else(HCT < 37, "low", if_else(HCT > 42, "high", "in range"))
+)
+
+dput(head(IBS)) 
+labels <- c("low", "in range", "high")
+IBS %>% mutate (
+  MCH_bucket = cut(MCH), c(-Inf, 27 - .Machine$double.eps, 33, Inf), (labels),
+  HCT_bucket = cut(HCT), c(-Inf, 37 - .Machine$double.eps, 42, Inf), (labels)
+)
+
+IBS %>% mutate (
+  MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range")),
+  HCT_bucket = if_else(HCT < 37, "low", if_else(HCT > 42, "high", "in range"))
+)
+
+##Linking abnormal values to Pt ID
+
+IBS %>% mutate(
+  MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range")),
+) %>%
+  group_by(MCH_bucket) %>% 
+  summarise(IDS=toString(ID))
+
+IBS %>% mutate(
+  MCH_bucket = if_else(MCH < 27, "low", if_else(MCH > 33, "high", "in range"))
+) %>%
+  group_by(MCH_bucket) %>% 
+  summarise(IDS=toString(ID))
+
+IBS %>% mutate(
+  HCT_bucket = if_else(HCT < 37, "low", if_else(HCT > 42, "high", "in range"))
+) %>%
+  group_by(HCT_bucket) %>% 
+  summarise(IDS=toString(ID))
+
+summarise(IDS=toString(ID))
+IBS %>% head()
