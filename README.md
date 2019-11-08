@@ -1,5 +1,5 @@
 ## AnalyzeHct-Mch
-This code is provided in a standard and easily readable format and is capable of performing ANOVA, sinlge linear regression, producing a box-and-whisker plot along with a scatter plot with regression line. Code also identifies subject IDs with abnormal lab values according to listed reference and places this evaluation into a new column in the data frame. 
+This standard, easily readable format of R code is capable of performing ANOVA, sinlge linear regression, producing a box-and-whisker plot along with a scatter plot with regression line. This code also identifies subject IDs with abnormal lab values according to values provided by cited reference. 
 
 Chernecky CC, Berger BJ. Blood indices – blood. In: Chernecky CC, Berger BJ, eds. Laboratory Tests and Diagnostic Procedures. 6th ed. Philadelphia, PA: Elsevier; 2013:217-219.
 
