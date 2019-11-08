@@ -60,6 +60,7 @@ dev.off()
 
 ![](Images/HCT_scatterplot.png?sanitize=true)
 
+
 ## Box plot of Hct-Mch
 ## https://www.statmethods.net/graphs/boxplot.html
 
