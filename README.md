@@ -77,7 +77,7 @@ print(HCT_scatterplot)
 dev.off()
 
 
-![BMI_HCT](../AnalyzeHct-Mch/Images/HCT_scatterplot.png?sanitize=true)
+![](Images/HCT_scatterplot.png?sanitize=true)
 
 ## Box plots
 ## https://www.statmethods.net/graphs/boxplot.html
