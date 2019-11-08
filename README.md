@@ -73,10 +73,11 @@ HCT_boxplot <- boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype",
 )
 print(HCT_boxplot)
 dev.off()
-![](Images/HCT_boxplot.png?sanitize=true)
+
 boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", 
         xlab = "IBS.subtype", ylab = "MCH"
 )
+
 boxplot(HCT ~ IBS.subtype, data = IBS, main="HCT by IBS subtype", 
                        xlab = "IBS.subtype", ylab = "HCT"
 )
@@ -87,6 +88,11 @@ dev.off()
 ![](Images/Rplot.png?sanitize=true)
 boxplot(MCH ~ IBS.subtype, data = IBS, main="MCH by IBS subtype", xlab = "IBS.subtype", ylab = "MCH"
 )
+
+![MCH](Images/Rplot.png?sanitize=true)
+
+![HCT](Images/HCT_boxplot.png?sanitize=true)
+
 
 ## Identification of Values outside of range
 
